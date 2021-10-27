@@ -34,6 +34,7 @@ app.get('/about',(req,res) => {
 })
 
 app.get('/help',(req,res) => {
+	
 	res.render('help',{
 		title: "Help",
 		helpText: "this page is under construction",
@@ -44,12 +45,38 @@ app.get('/help',(req,res) => {
 
 
 
+
 app.get("/weather", (req,res) => {
+	let address= req.query.adress;
+	if(!req.query.address){
+		return res.send({
+			error :"you must provide an address"}
+			)
+	}
 	res.send({
+		
 		location: "Boston",
-		forecast:"Rainning"
+		forecast:"Rainning",
+		address: req.query.address
 	});
 })
+
+app.get("/products", (req,res) => {
+	
+	if(!req.query.search){
+		return res.send({
+			error: 'you must provide a search term'
+		})
+	}
+		res.send({
+		products: []
+	})
+
+	
+	
+	
+})
+
 
 app.get('/help/*',(req,res)=>{
 	res.render('404',{
